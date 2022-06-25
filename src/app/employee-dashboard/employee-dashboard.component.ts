@@ -9,10 +9,13 @@ import { EmployeeModel } from './employee-dashboard.model';
 })
 export class EmployeeDashboardComponent implements OnInit {
   formValue !: FormGroup;
+  employeeData !: any;
   employeeModelObj: EmployeeModel= new EmployeeModel();
-
-  constructor(private formbuilder: FormBuilder ,
-    private api:ApiService) { }
+  //showAdd !: boolean;
+  //showUpdate !: boolean;
+ // role:string =""
+  constructor(private api: ApiService,
+    private formbuilder: FormBuilder){ }
 
   ngOnInit(): void {
     this.formValue = this.formbuilder.group({
@@ -22,7 +25,15 @@ export class EmployeeDashboardComponent implements OnInit {
       add:[''],
       salary:['']
     })
+    this.getAllEmployee();
+   // this.role = localStorage.getItem('userType')!
   }
+  /*clickAddEmployee(){
+    this.formValue.reset();
+    this.showAdd = true;
+    this.showUpdate = false;
+  }*/
+
 postEmployeeDetails(){
   this.employeeModelObj.name= this.formValue.value.name;
   this.employeeModelObj.email= this.formValue.value.email;
@@ -30,22 +41,60 @@ postEmployeeDetails(){
   this.employeeModelObj.add= this.formValue.value.add;
   this.employeeModelObj.salary= this.formValue.value.salary;
 
-  this.api.postEmployee(this.employeeModelObj)
-  .subscribe(
-    res=>{
-      console.log(res);
-      alert("Employee Added Successfully");
-    },
-    err=> {
-      alert("Something went wrong");
-    }
-    )
-
-}
-}
+  this.api.PostEmployee(this.employeeModelObj)
+  .subscribe(res => {
+    console.log(res);
+    alert("Employee Added Successfully")
+    let ref= document.getElementById('cancel')
+    ref?.click();
+    this.formValue.reset();
+    this.getAllEmployee();
+  })
+  }
 
 
-function res(res: any) {
-  throw new Error('Function not implemented.');
+getAllEmployee() {
+  this.api.GetEmployee()
+  .subscribe(res=>{
+    this.employeeData = res;
+
+  })
 }
+deleteEmployee(row:any ){
+  this.api.DeleteEmployee(row.id)
+  .subscribe(res=>{
+    alert("Deleted Successfully");
+    this.getAllEmployee();
+  })
+ }
+}
+
+
+
+
+/*editEmployeeDetail(){
+  this.employeeModelObj.name= this.formValue.value.name;
+  this.employeeModelObj.email= this.formValue.value.email;
+  this.employeeModelObj.mobile= this.formValue.value.mobile;
+  this.employeeModelObj.add= this.formValue.value.add;
+  this.employeeModelObj.salary= this.formValue.value.salary;
+ this.api.UpdateEmployee(this.employeeModelObj)
+ .subscribe(res=>{
+   alert("Updated Successfully")
+   let ref = document.getElementById('close');
+   ref?.click();
+   this.getEmployeeDetails();
+ })
+}
+onEdit(row : any){
+  this.employeeModelObj.id = row.id;
+  this.formValue.controls['name'].setValue(row.Name);
+  this.formValue.controls['email'].setValue(row.email);
+  this.formValue.controls['mobile'].setValue(row.mobile);
+  this.formValue.controls['add'].setValue(row.add);
+  this.formValue.controls['salary'].setValue(row.salary);
+  this.showUpdate = true;
+  this.showAdd = false;
+}*/
+
 

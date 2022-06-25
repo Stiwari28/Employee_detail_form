@@ -22,16 +22,16 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>101</td>
-      <td>Something</td>
-      <td>Something@gmail.com</td>
-      <td>123456789</td>
-      <td>templateUrl: './employee-dashboard.component.html',</td>
-      <td>10000</td>
+    <tr *ngFor="let row of employeeData">
+      <td>{{row.id}}</td>
+      <td>{{row.name}}</td>
+      <td>{{row.email}}</td>
+      <td>{{row.mobile}}</td>
+      <td>{{row.add}}</td>
+      <td>₹ {{row.salary}}</td>
       <td>
-        <button class="btn btn-info">Edit</button>
-        <button class="btn btn-danger mx-3">Delete</button>
+        <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-info">Edit</button>
+        <button (click)="deleteEmployee(row)" class="btn btn-danger mx-3" >Delete</button>
       </td>
     </tr>
   </tbody>
@@ -71,8 +71,8 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-info" (click)="postEmployeeDetails()">Add</button>
+        <button id="cancel" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button"  (click)="postEmployeeDetails()" class="btn btn-info" >Add</button>
       </div>
     </div>
   </div>
