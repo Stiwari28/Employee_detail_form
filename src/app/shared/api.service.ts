@@ -21,13 +21,13 @@ export class ApiService {
       return res;
     }));
   }
-UpdateEmployee(data: any){
-  return this.http.put<any>("http://localhost:3000/posts", data)
+UpdateEmployee(data: any, id: number){
+  return this.http.put<any>("http://localhost:3000/posts"+id, data)
   .pipe(map((res:any)=>{
     return res;
   }));
 }
-DeleteEmployee(id: number){
+DeleteEmployee( id: number){
   return this.http.delete<any>("http://localhost:3000/posts"+id)
   .pipe(map((res:any)=>{
     return res;

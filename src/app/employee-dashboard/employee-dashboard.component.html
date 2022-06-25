@@ -30,7 +30,7 @@
       <td>{{row.add}}</td>
       <td>₹ {{row.salary}}</td>
       <td>
-        <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-info">Edit</button>
+        <button (click)="onEdit(row)" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-info">Edit</button>
         <button (click)="deleteEmployeeDetails(row)" class="btn btn-danger mx-3" >Delete</button>
       </td>
     </tr>
@@ -72,7 +72,8 @@
       </div>
       <div class="modal-footer">
         <button id="cancel" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button"  (click)="postEmployeeDetails()" class="btn btn-info" >Add</button>
+        <button type="button" *ngIf="showAdd" (click)="postEmployeeDetails()" class="btn btn-info" >Add</button>
+        <button type="button" *ngIf="showUpdate" (click)="updateEmployeeDetails()" class="btn btn-info" >Update</button>
       </div>
     </div>
   </div>

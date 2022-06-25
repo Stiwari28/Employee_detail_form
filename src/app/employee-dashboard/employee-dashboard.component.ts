@@ -11,8 +11,8 @@ export class EmployeeDashboardComponent implements OnInit {
   formValue !: FormGroup;
   employeeData !: any;
   employeeModelObj: EmployeeModel= new EmployeeModel();
-  //showAdd !: boolean;
-  //showUpdate !: boolean;
+  showAdd !: boolean;
+  showUpdate !: boolean;
  // role:string =""
   constructor(private api: ApiService,
     private formbuilder: FormBuilder){ }
@@ -28,11 +28,11 @@ export class EmployeeDashboardComponent implements OnInit {
     this.getAllEmployee();
    // this.role = localStorage.getItem('userType')!
   }
-  /*clickAddEmployee(){
+  clickAddEmployee(){
     this.formValue.reset();
     this.showAdd = true;
     this.showUpdate = false;
-  }*/
+  }
 
 postEmployeeDetails(){
   this.employeeModelObj.name= this.formValue.value.name;
@@ -61,42 +61,40 @@ getAllEmployee() {
   })
 }
 deleteEmployeeDetails(row:any ){
-  let clickedYes = confirm("Are you sure want to delete");
-   if(clickedYes){
-  this.api.DeleteEmployee(row.id)
-  .subscribe(res=>{
+  this.api.DeleteEmployee(row.id )
+  .subscribe(data=>{
     alert("Deleted Successfully");
     this.getAllEmployee();
   })
  }
-}
-}
 
 
 
-/*editEmployeeDetail(){
+
+ updateEmployeeDetails(){
   this.employeeModelObj.name= this.formValue.value.name;
   this.employeeModelObj.email= this.formValue.value.email;
   this.employeeModelObj.mobile= this.formValue.value.mobile;
   this.employeeModelObj.add= this.formValue.value.add;
   this.employeeModelObj.salary= this.formValue.value.salary;
- this.api.UpdateEmployee(this.employeeModelObj)
- .subscribe(res=>{
-   alert("Updated Successfully")
+ this.api.UpdateEmployee(this.employeeModelObj, this.employeeModelObj.id)
+ .subscribe(data=>{
+   alert("Updated Successfully");
    let ref = document.getElementById('close');
    ref?.click();
-   this.getEmployeeDetails();
+   this.formValue.reset();
+   this.getAllEmployee();
  })
 }
 onEdit(row : any){
   this.employeeModelObj.id = row.id;
-  this.formValue.controls['name'].setValue(row.Name);
+  this.formValue.controls['name'].setValue(row.name);
   this.formValue.controls['email'].setValue(row.email);
   this.formValue.controls['mobile'].setValue(row.mobile);
   this.formValue.controls['add'].setValue(row.add);
   this.formValue.controls['salary'].setValue(row.salary);
   this.showUpdate = true;
   this.showAdd = false;
-}*/
+}
 
-
+}
