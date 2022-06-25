@@ -36,9 +36,9 @@ postEmployeeDetails(){
       console.log(res);
       alert("Employee Added Successfully");
     },
-   err=> {
-    alert("Something went wrong");
-  }
+    err=> {
+      alert("Something went wrong");
+    }
     )
 
 }
