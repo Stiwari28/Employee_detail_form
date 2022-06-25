@@ -60,7 +60,9 @@ getAllEmployee() {
 
   })
 }
-deleteEmployee(row:any ){
+deleteEmployeeDetails(row:any ){
+  let clickedYes = confirm("Are you sure want to delete");
+   if(clickedYes){
   this.api.DeleteEmployee(row.id)
   .subscribe(res=>{
     alert("Deleted Successfully");
@@ -68,7 +70,7 @@ deleteEmployee(row:any ){
   })
  }
 }
-
+}
 
 
 
