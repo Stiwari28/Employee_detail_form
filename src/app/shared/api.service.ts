@@ -10,7 +10,7 @@ export class ApiService {
   constructor(private http : HttpClient) { }
     postEmployee(data: any){
       return this.http.post<any>("http://localhost:3000/posts", data)
-      .pipe(map)
+      .pipe(map(console.log))
     }
   }
 
