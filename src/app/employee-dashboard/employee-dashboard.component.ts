@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, resolveForwardRef } from '@angular/core';
 import{FormBuilder, FormGroup} from '@angular/forms'
 import { ApiService } from '../shared/api.service';
 import { EmployeeModel } from './employee-dashboard.model';
@@ -62,7 +62,8 @@ getAllEmployee() {
 }
 deleteEmployeeDetails(row:any ){
   this.api.DeleteEmployee(row.id )
-  .subscribe(data=>{
+  .subscribe(res=>{
+    console.log(res);
     alert("Deleted Successfully");
     this.getAllEmployee();
   })
@@ -78,7 +79,8 @@ deleteEmployeeDetails(row:any ){
   this.employeeModelObj.add= this.formValue.value.add;
   this.employeeModelObj.salary= this.formValue.value.salary;
  this.api.UpdateEmployee(this.employeeModelObj, this.employeeModelObj.id)
- .subscribe(data=>{
+ .subscribe(res=>{
+  console.log(res);
    alert("Updated Successfully");
    let ref = document.getElementById('close');
    ref?.click();
