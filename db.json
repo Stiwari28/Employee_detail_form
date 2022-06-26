@@ -2,19 +2,11 @@
   "posts": [
     {
       "id": 1,
-      "name": "test1",
-      "email": "test1",
-      "mobile": "1234",
-      "add": "test1",
-      "salary": "test1"
-    },
-    {
-      "id": 2,
-      "name": "test1",
-      "email": "test1",
-      "mobile": "1234",
-      "add": "test1",
-      "salary": "test1"
+      "name": "test_employee",
+      "email": "test1123@gmail.com",
+      "mobile": "12345678",
+      "add": "test123",
+      "salary": "56789"
     }
   ],
   "comments": [],

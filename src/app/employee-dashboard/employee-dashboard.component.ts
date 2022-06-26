@@ -82,7 +82,7 @@ deleteEmployeeDetails(row:any ){
  .subscribe(res=>{
   console.log(res);
    alert("Updated Successfully");
-   let ref = document.getElementById('close');
+   let ref = document.getElementById('cancel');
    ref?.click();
    this.formValue.reset();
    this.getAllEmployee();
